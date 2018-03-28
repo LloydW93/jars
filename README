@@ -1,0 +1,9 @@
+Just Another Radio Station
+==========================
+
+Getting started:
+- Create an /etc/jars/config.json with example config
+- Create an /etc/jars/secret with a secret string for JWT signing
+- pip3 install pipenv (or pip install pipenv if you're on a 3 native system)
+- pipenv install
+- pipenv run python src/main.py

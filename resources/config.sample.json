@@ -1,0 +1,19 @@
+{
+	"_": "Update and put in /etc/jars/config.json",
+	"db": {
+		"host": "localhost",
+		"port": "5432",
+		"user": "jars",
+		"password": "jars"
+	},
+	"myradio": {
+		"api_url": "http://localhost/api/v2",
+		"api_key": "q1w2e3r4t5",
+		"standard_user_permission": -1,
+		"super_user_permission": -2
+	},
+	"jwt": {
+		"secret": "thisislikeareallylonganduniqueandimpossibletoguesssecret",
+		"token_lifetime": 86400
+	}
+}
