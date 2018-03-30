@@ -3,9 +3,9 @@ from datetime import datetime, timedelta
 
 class Event:
 
-    CREATE_SQL = "INSERT INTO jaws.events (event_uuid, created_by, expires_time, title, description, private) VALUES (%s, %s, %s, %s, %s, %s)"
-    FETCH_SQL = "SELECT * FROM jaws.events WHERE event_uuid=%s AND expires_time < NOW()"
-    CONNECT_SQL = "UPDATE jaws.events SET connected=NOW(), connected_by=%s WHERE event_uuid=%s"
+    CREATE_SQL = "INSERT INTO jars.events (event_uuid, created_by, expires_time, title, description, private) VALUES (%s, %s, %s, %s, %s, %s)"
+    FETCH_SQL = "SELECT * FROM jars.events WHERE event_uuid=%s AND expires_time > NOW()"
+    CONNECT_SQL = "UPDATE jars.events SET connected=true, connected_by=%s WHERE event_uuid=%s"
 
     def __init__(self, config):
         self.config = config;
@@ -18,7 +18,7 @@ class Event:
         )
 
     def create_event(self, claim, title, description, private):
-        event_id = uuid.uuid4()
+        event_id = str(uuid.uuid4())
         expiry_time = datetime.today() + timedelta(0, self.config["events"]["lifetime"])
 
         cur = self.db.cursor()
@@ -35,7 +35,9 @@ class Event:
 
         cur = self.db.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
-        cur.execute(Event.FETCH_SQL, event_id)
+        print(Event.FETCH_SQL)
+        print(event_id)
+        cur.execute(Event.FETCH_SQL, (event_id,))
 
         if cur.rowcount == 0:
             raise NonExistentOrExpiredEventException()

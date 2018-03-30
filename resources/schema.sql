@@ -17,3 +17,5 @@ CREATE TABLE events (
 	-- Could be used to link to a Show/Season/Timeslot in future
 	relation_id INTEGER
 );
+
+GRANT ALL PRIVILEGES ON events TO jars;

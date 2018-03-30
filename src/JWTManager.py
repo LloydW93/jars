@@ -27,3 +27,8 @@ class JWTManager:
         with open(self.config["jwt"]["public_key"], "r") as f:
             public_key = f.read()
             return jwt.decode(claim, public_key, algorithms=["RS256"])
+
+    def get_public_key(self):
+        with open(self.config["jwt"]["public_key"], "r") as f:
+            public_key = f.read()
+            return public_key

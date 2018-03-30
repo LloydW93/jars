@@ -11,14 +11,20 @@ class MyRadioClient:
     def get_user_id_if_exists(self, user, password):
         api_request_url = self.config["myradio"]["api_url"] + "/auth/testcredentials"
         api_request_data = {
-            "api_key": self.config["myradio"]["api_key"],
             "user": user,
             "pass": password
         }
-        result = requests.post(api_request_url, data=api_request_data, headers={"User-Agent": "JARS/0.1"})
+        api_request_params = {
+            "api_key": self.config["myradio"]["api_key"]
+        }
+        result = requests.post(
+            api_request_url,
+            data=api_request_data,
+            params=api_request_params,
+            headers={"User-Agent": "JARS/0.1"})
 
         if result.status_code != 200:
-            raise MyRadioServiceFailureException(result)
+            raise MyRadioServiceFailureException(result.text if result.text else result)
 
         data = result.json()
 
@@ -29,13 +35,13 @@ class MyRadioClient:
 
     def get_user_access_level(self, memberid):
         api_request_url = self.config["myradio"]["api_url"] + "/user/" + str(memberid) + "/permissions"
-        api_request_data = {
+        api_request_params = {
             "api_key": self.config["myradio"]["api_key"]
         }
-        result = requests.get(api_request_url, data=api_request_data, headers={"User-Agent": "JARS/0.1"})
+        result = requests.get(api_request_url, params=api_request_params, headers={"User-Agent": "JARS/0.1"})
 
         if result.status_code != 200:
-            raise MyRadioServiceFailureException(result)
+            raise MyRadioServiceFailureException(result.text if result.text else result)
 
         data = result.json()
 

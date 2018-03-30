@@ -56,7 +56,7 @@ class EventTest(unittest.TestCase):
         mock_cur = mock_con.cursor.return_value
 
         mock_cur.execute.assert_called_with(
-            "INSERT INTO jaws.events (event_uuid, created_by, expires_time, title, description, private) VALUES (%s, %s, %s, %s, %s, %s)",
+            "INSERT INTO jars.events (event_uuid, created_by, expires_time, title, description, private) VALUES (%s, %s, %s, %s, %s, %s)",
             (EventTest.TEST_UUID, 123, expected_expires_datetime, "Title", "Description", False))
 
     @patch('Event.psycopg2.connect')

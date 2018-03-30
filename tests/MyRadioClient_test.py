@@ -31,9 +31,12 @@ class MyRadioClientTest(unittest.TestCase):
 
         mock_post.assert_called_with("http://localhost/api/v2/auth/testcredentials", data={
                 "user": "user",
-                "pass": "pass",
-                "api_key": self.CONFIG["myradio"]["api_key"],
-            }, headers={"User-Agent": "JARS/0.1"})
+                "pass": "pass"
+            },
+            params={
+                "api_key": self.CONFIG["myradio"]["api_key"]
+            },
+            headers={"User-Agent": "JARS/0.1"})
 
     @patch('MyRadioClient.requests.post')
     def test_login_valid_succeeds(self, mock_post):
@@ -45,9 +48,12 @@ class MyRadioClientTest(unittest.TestCase):
 
         mock_post.assert_called_with("http://localhost/api/v2/auth/testcredentials", data={
                 "user": "user",
-                "pass": "pass",
+                "pass": "pass"
+            },
+            params={
                 "api_key": self.CONFIG["myradio"]["api_key"]
-            }, headers={"User-Agent": "JARS/0.1"})
+            },
+            headers={"User-Agent": "JARS/0.1"})
 
     @patch('MyRadioClient.requests.get')
     def test_permissions_none(self, mock_get):
@@ -58,7 +64,7 @@ class MyRadioClientTest(unittest.TestCase):
         with self.assertRaises(MyRadioClient.NoUserPermissionException):
             under_test.get_user_access_level(123)
 
-        mock_get.assert_called_with("http://localhost/api/v2/user/123/permissions", data={
+        mock_get.assert_called_with("http://localhost/api/v2/user/123/permissions", params={
                 "api_key": self.CONFIG["myradio"]["api_key"]
             }, headers={"User-Agent": "JARS/0.1"})
 
@@ -70,7 +76,7 @@ class MyRadioClientTest(unittest.TestCase):
 
         self.assertEqual(under_test.get_user_access_level(123), MyRadioClient.ACCESS_USER)
 
-        mock_get.assert_called_with("http://localhost/api/v2/user/123/permissions", data={
+        mock_get.assert_called_with("http://localhost/api/v2/user/123/permissions", params={
                 "api_key": self.CONFIG["myradio"]["api_key"]
             }, headers={"User-Agent": "JARS/0.1"})
 
@@ -82,6 +88,6 @@ class MyRadioClientTest(unittest.TestCase):
 
         self.assertEqual(under_test.get_user_access_level(123), MyRadioClient.ACCESS_ADMIN)
 
-        mock_get.assert_called_with("http://localhost/api/v2/user/123/permissions", data={
+        mock_get.assert_called_with("http://localhost/api/v2/user/123/permissions", params={
                 "api_key": self.CONFIG["myradio"]["api_key"]
             }, headers={"User-Agent": "JARS/0.1"})
