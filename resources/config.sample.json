@@ -4,7 +4,8 @@
 		"host": "localhost",
 		"port": "5432",
 		"user": "jars",
-		"password": "jars"
+		"password": "jars",
+		"dbname": "jars"
 	},
 	"myradio": {
 		"api_url": "http://localhost/api/v2",
@@ -13,7 +14,11 @@
 		"super_user_permission": -2
 	},
 	"jwt": {
-		"secret": "thisislikeareallylonganduniqueandimpossibletoguesssecret",
+		"public_key": "/etc/jars/sample_service.pem",
+		"private_key": "/etc/jars/sample_service.key",
 		"token_lifetime": 86400
+	},
+	"events": {
+		"lifetime": 864000
 	}
 }

@@ -15,7 +15,7 @@ class MyRadioClient:
             "user": user,
             "pass": password
         }
-        result = requests.post(api_request_url, data=api_request_data)
+        result = requests.post(api_request_url, data=api_request_data, headers={"User-Agent": "JARS/0.1"})
 
         if result.status_code != 200:
             raise MyRadioServiceFailureException(result)
@@ -32,7 +32,7 @@ class MyRadioClient:
         api_request_data = {
             "api_key": self.config["myradio"]["api_key"]
         }
-        result = requests.get(api_request_url, data=api_request_data)
+        result = requests.get(api_request_url, data=api_request_data, headers={"User-Agent": "JARS/0.1"})
 
         if result.status_code != 200:
             raise MyRadioServiceFailureException(result)

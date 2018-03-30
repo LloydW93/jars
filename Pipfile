@@ -5,6 +5,11 @@ verify_ssl = true
 
 [packages]
 requests = "*"
+pyjwt = "*"
+cryptography = "*"
+websockets = "*"
+tornado = "*"
+"psycopg2" = "*"
 
 [dev-packages]
 
