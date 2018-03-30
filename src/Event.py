@@ -35,8 +35,6 @@ class Event:
 
         cur = self.db.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
-        print(Event.FETCH_SQL)
-        print(event_id)
         cur.execute(Event.FETCH_SQL, (event_id,))
 
         if cur.rowcount == 0:
